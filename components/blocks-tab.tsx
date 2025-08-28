@@ -21,7 +21,7 @@ export function BlocksTab() {
     } catch (error) {
       toast({
         title: "Ошибка",
-        description: "Не удалось загрузить запросы на блокировку",
+        description: "Не удалось загрузить запросы на блокировку"
       })
     } finally {
       setLoading(false)
@@ -49,38 +49,38 @@ export function BlocksTab() {
   }
 
   if (loading && !blocks) {
-    return <div className="text-center py-8">Загрузка запросов на блокировку...</div>
+    return <div className="text-center py-8 text-sm sm:text-base">Загрузка запросов на блокировку...</div>
   }
 
   return (
-      <div className="space-y-6">
+      <div className="space-y-4 sm:space-y-6">
         {blocks && blocks.content.length === 0 ? (
             <Card className="border-gray-200">
-              <CardContent className="text-center py-12">
-                <Shield className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-                <h3 className="text-lg font-medium text-gray-900 mb-2">Нет запросов на блокировку</h3>
-                <p className="text-gray-500">
+              <CardContent className="text-center py-8 sm:py-12 px-4">
+                <Shield className="h-12 w-12 sm:h-16 sm:w-16 text-gray-400 mx-auto mb-3 sm:mb-4" />
+                <h3 className="text-base sm:text-lg font-medium text-gray-900 mb-2">Нет запросов на блокировку</h3>
+                <p className="text-gray-500 text-sm sm:text-base leading-relaxed">
                   Вы еще не создавали запросов на блокировку карт. Вы можете запросить блокировку карты на вкладке "Карты".
                 </p>
               </CardContent>
             </Card>
         ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
               {blocks?.content.map((block) => (
                   <Card key={block.id} className="border-gray-200 hover:shadow-md transition-shadow">
-                    <CardHeader>
-                      <CardTitle className="text-lg flex items-center space-x-2">
-                        <Shield className="h-5 w-5 text-blue-600" />
-                        <span>Запрос на блокировку #{block.id}</span>
+                    <CardHeader className="pb-3 sm:pb-4">
+                      <CardTitle className="text-base sm:text-lg flex items-start space-x-2">
+                        <Shield className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                        <span className="leading-tight">Запрос на блокировку #{block.id}</span>
                       </CardTitle>
-                      <CardDescription>
+                      <CardDescription className="text-xs sm:text-sm">
                         ID карты: {block.cardId} | {new Date(block.requestDate).toLocaleDateString()}
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <div className="space-y-2">
-                        <div className="flex justify-between">
-                          <span>Статус:</span>
+                      <div className="space-y-2 sm:space-y-3">
+                        <div className="flex justify-between items-center">
+                          <span className="text-sm sm:text-base">Статус:</span>
                           <span
                               className={`font-medium px-2 py-1 rounded-full text-xs ${
                                   block.status === "APPROVED"
@@ -98,9 +98,11 @@ export function BlocksTab() {
                     </span>
                         </div>
                         {block.adminComment && (
-                            <div className="mt-2">
-                              <span className="text-sm font-medium">Комментарий администратора:</span>
-                              <p className="text-sm text-gray-600 mt-1 bg-gray-50 p-2 rounded">{block.adminComment}</p>
+                            <div className="mt-2 sm:mt-3">
+                              <span className="text-xs sm:text-sm font-medium">Комментарий администратора:</span>
+                              <p className="text-xs sm:text-sm text-gray-600 mt-1 bg-gray-50 p-2 rounded leading-relaxed">
+                                {block.adminComment}
+                              </p>
                             </div>
                         )}
                         {block.status === "PENDING" && (
@@ -108,9 +110,9 @@ export function BlocksTab() {
                                 onClick={() => handleDelete(block.id)}
                                 variant="outline"
                                 size="sm"
-                                className="w-full mt-4 border-red-300 text-red-700 hover:bg-red-50"
+                                className="w-full mt-3 sm:mt-4 border-red-300 text-red-700 hover:bg-red-50 text-xs sm:text-sm"
                             >
-                              <AlertCircle className="mr-2 h-4 w-4" />
+                              <AlertCircle className="mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                               Отменить запрос
                             </Button>
                         )}
@@ -122,14 +124,19 @@ export function BlocksTab() {
         )}
 
         {blocks && blocks.totalPages > 1 && (
-            <div className="flex justify-center space-x-2">
-              <Button onClick={() => setPage(page - 1)} disabled={page === 0} variant="outline">
+            <div className="flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-2">
+              <Button onClick={() => setPage(page - 1)} disabled={page === 0} variant="outline" size="sm">
                 Предыдущая
               </Button>
-              <span className="py-2 px-4">
+              <span className="py-2 px-4 text-sm sm:text-base">
             Страница {page + 1} из {blocks.totalPages}
           </span>
-              <Button onClick={() => setPage(page + 1)} disabled={page >= blocks.totalPages - 1} variant="outline">
+              <Button
+                  onClick={() => setPage(page + 1)}
+                  disabled={page >= blocks.totalPages - 1}
+                  variant="outline"
+                  size="sm"
+              >
                 Следующая
               </Button>
             </div>
