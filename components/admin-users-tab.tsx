@@ -26,9 +26,11 @@ export function AdminUsersTab() {
       const response = await api.getUsers(page, 10)
       setUsers(response)
     } catch (error) {
+      const message = error instanceof Error ? error.message : "Не удалось загрузить пользователей";
+
       toast({
         title: "Ошибка",
-        description: "Не удалось загрузить пользователей"
+        description: message
       })
     } finally {
       setLoading(false)
@@ -51,9 +53,11 @@ export function AdminUsersTab() {
       setCreateDialogOpen(false)
       loadUsers()
     } catch (error) {
+      const message = error instanceof Error ? error.message : "Не удалось создать пользователя";
+
       toast({
         title: "Ошибка",
-        description: "Не удалось создать пользователя"
+        description: message
       })
     }
   }
@@ -67,9 +71,11 @@ export function AdminUsersTab() {
       })
       loadUsers()
     } catch (error) {
+      const message = error instanceof Error ? error.message : "Не удалось обновить пользователя";
+
       toast({
         title: "Ошибка",
-        description: "Не удалось обновить пользователя"
+        description: message
       })
     }
   }
@@ -83,9 +89,11 @@ export function AdminUsersTab() {
       })
       loadUsers()
     } catch (error) {
+      const message = error instanceof Error ? error.message : "Не удалось обновить пользователя";
+
       toast({
         title: "Ошибка",
-        description: "Не удалось обновить пользователя"
+        description: message
       })
     }
   }
@@ -99,9 +107,11 @@ export function AdminUsersTab() {
       })
       loadUsers()
     } catch (error) {
+      const message = error instanceof Error ? error.message : "Не удалось обновить роль";
+
       toast({
         title: "Ошибка",
-        description: "Не удалось обновить роль"
+        description: message
       })
     }
   }
@@ -117,9 +127,11 @@ export function AdminUsersTab() {
       })
       loadUsers()
     } catch (error) {
+      const message = error instanceof Error ? error.message : "Не удалось удалить пользователя";
+
       toast({
         title: "Ошибка",
-        description: "Не удалось удалить пользователя"
+        description: message
       })
     }
   }

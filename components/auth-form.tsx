@@ -8,8 +8,13 @@ import {Input} from "@/components/ui/input"
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card"
 import {useAuth} from "@/contexts/auth-context"
 import {useToast} from "@/hooks/use-toast"
+import { ArrowLeft } from "lucide-react"
 
-export function AuthForm() {
+interface AuthFormProps {
+    onBack?: () => void
+}
+
+export function AuthForm({ onBack }: AuthFormProps)  {
     const [isLogin, setIsLogin] = useState(true)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -44,6 +49,14 @@ export function AuthForm() {
 
     return (
         <Card className="w-full max-w-md mx-auto border-blue-200">
+            {onBack && (
+                <div className="p-4 pb-0">
+                    <Button variant="ghost" onClick={onBack} className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 p-2">
+                        <ArrowLeft className="h-4 w-4 mr-2" />
+                        На главную
+                    </Button>
+                </div>
+            )}
             <CardHeader className="text-center pb-4">
                 <CardTitle className="text-xl sm:text-2xl">{isLogin ? "Вход" : "Регистрация"}</CardTitle>
                 <CardDescription className="text-sm sm:text-base">

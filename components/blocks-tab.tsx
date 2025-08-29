@@ -19,9 +19,11 @@ export function BlocksTab() {
       const response = await api.getUserCardBlocks(page, 10)
       setBlocks(response)
     } catch (error) {
+      const message = error instanceof Error ? error.message : "Не удалось загрузить запросы на блокировку"
+
       toast({
         title: "Ошибка",
-        description: "Не удалось загрузить запросы на блокировку"
+        description: message
       })
     } finally {
       setLoading(false)
@@ -41,9 +43,11 @@ export function BlocksTab() {
       })
       loadBlocks()
     } catch (error) {
+      const message = error instanceof Error ? error.message : "Не удалось удалить запрос на блокировку"
+
       toast({
         title: "Ошибка",
-        description: "Не удалось удалить запрос на блокировку",
+        description: message,
       })
     }
   }

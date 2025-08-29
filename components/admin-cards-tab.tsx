@@ -44,9 +44,11 @@ export function AdminCardsTab() {
       const response = await api.getAllCards(page, 10, filtersToUse)
       setCards(response)
     } catch (error) {
+      const message = error instanceof Error ? error.message : "Не получилось загрузить карты";
+
       toast({
         title: "Ошибка",
-        description: "Не получилось загрузить карты"
+        description: message
       })
     } finally {
       setLoading(false)
@@ -103,9 +105,11 @@ export function AdminCardsTab() {
       setCreateDialogOpen(false)
       loadCards()
     } catch (error) {
+      const message = error instanceof Error ? error.message : "Не получилось создать карту";
+
       toast({
         title: "Ошибка",
-        description: "Не получилось создать карту",
+        description: message,
       })
     }
   }
@@ -119,9 +123,11 @@ export function AdminCardsTab() {
       })
       loadCards()
     } catch (error) {
+      const message = error instanceof Error ? error.message : "Не получилось обновить статус карты";
+
       toast({
         title: "Ошибка",
-        description: "Не получилось обновить статус карты",
+        description: message,
       })
     }
   }
@@ -137,9 +143,11 @@ export function AdminCardsTab() {
       })
       loadCards()
     } catch (error) {
+      const message = error instanceof Error ? error.message : "Не удалось удалить карту";
+
       toast({
         title: "Ошибка",
-        description: "Не удалось удалить карту",
+        description: message,
       })
     }
   }

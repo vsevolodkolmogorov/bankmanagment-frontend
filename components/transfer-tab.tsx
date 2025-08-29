@@ -29,8 +29,7 @@ export function TransferTab() {
       } catch (error) {
         toast({
           title: "Ошибка",
-          description: "Не удалось загрузить карты",
-          variant: "destructive",
+          description: "Не удалось загрузить карты"
         })
       } finally {
         setCardsLoading(false)
@@ -44,8 +43,7 @@ export function TransferTab() {
     if (!fromCardId || !toCardId || !amount) {
       toast({
         title: "Ошибка",
-        description: "Пожалуйста, заполните все поля",
-        variant: "destructive",
+        description: "Пожалуйста, заполните все поля"
       })
       return
     }
@@ -54,7 +52,6 @@ export function TransferTab() {
       toast({
         title: "Ошибка",
         description: "Нельзя переводить на ту же карту",
-        variant: "destructive",
       })
       return
     }
@@ -74,10 +71,11 @@ export function TransferTab() {
       setToCardId("")
       setAmount("")
     } catch (error) {
+      const message = error instanceof Error ? error.message : "Перевод не удался"
+
       toast({
         title: "Ошибка",
-        description: "Перевод не удался",
-        variant: "destructive",
+        description: message
       })
     } finally {
       setLoading(false)

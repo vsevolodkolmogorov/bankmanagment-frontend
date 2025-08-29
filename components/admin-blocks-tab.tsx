@@ -64,9 +64,11 @@ export function AdminBlocksTab() {
       setActionDialogOpen(false)
       loadBlocks()
     } catch (error) {
+      const message = error instanceof Error ? error.message : `Не удалось ${actionType === "approve" ? "одобрить" : "отклонить"} запрос на блокировку`
+
       toast({
         title: "Ошибка",
-        description: `Не удалось ${actionType === "approve" ? "одобрить" : "отклонить"} запрос на блокировку`,
+        description: message,
       })
     }
   }
@@ -82,9 +84,11 @@ export function AdminBlocksTab() {
       })
       loadBlocks()
     } catch (error) {
+      const message = error instanceof Error ? error.message : "Не удалось удалить запрос на блокировку";
+
       toast({
         title: "Ошибка",
-        description: "Не удалось удалить запрос на блокировку",
+        description: message,
       })
     }
   }
